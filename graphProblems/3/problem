@@ -1,0 +1,73 @@
+Challenge: Network Throughput Maxima (Medium Graph)
+Problem Description
+You are a network engineer configuring a data communication system between servers. You are given a network of servers (nodes) and the fiber-optic cables connecting them (edges).
+
+Each cable has a specific bandwidth capacity (weight) measured in Megabits per second (Mbps). This weight represents the maximum amount of data that can flow through that specific cable.
+
+When sending data along a path from a source_server to a target_server, the overall speed of the path is limited by its tightest bottleneck. In other words, the maximum throughput of a path is the minimum bandwidth cable along that route.
+
+Your task is to find a path from the source_server to the target_server that maximizes this bottleneck value, and return the maximum possible throughput speed, along with the exact path taken. If the target server cannot be reached, return -1 and an empty list [].
+
+How the Weighted Graph is Input
+The graph is represented as an Adjacency List dictionary containing pairs of (neighbor, bandwidth).
+
+     (1) ===[100 Mbps]===> (2)
+      |                     |
+ [50 Mbps]             [80 Mbps]
+      |                     |
+     (3) ===[70 Mbps]====> (4)
+In Python:
+
+Python
+server_network = {
+    1: [(2, 100), (3, 50)],
+    2: [(1, 100), (4, 80)],
+    3: [(1, 50),  (4, 70)],
+    4: [(2, 80),  (3, 70)]
+}
+Function Signature
+Implement the function find_max_throughput_path.
+
+Input:
+
+graph: A dictionary representing the weighted adjacency list.
+
+source_server: The integer ID of the starting server.
+
+target_server: The integer ID of the destination server.
+
+Output: A tuple containing (max_throughput, path_list).
+
+Examples (Using server_network above)
+Example 1
+Input: graph = server_network, source_server = 1, target_server = 4
+
+Output: (80, [1, 2, 4])
+
+Explanation:
+
+Route 1: 1 -> 2 -> 4. The cables are 100 Mbps and 80 Mbps. The bottleneck (minimum) is 80 Mbps.
+
+Route 2: 1 -> 3 -> 4. The cables are 50 Mbps and 70 Mbps. The bottleneck (minimum) is 50 Mbps.
+
+The maximum throughput we can achieve is 80 Mbps, using the path [1, 2, 4].
+
+Example 2
+Input: graph = server_network, source_server = 3, target_server = 2
+
+Output: (70, [3, 4, 2])
+
+Explanation:
+
+Route 1: 3 -> 1 -> 2. Bottleneck is 50 Mbps (limited by the 1 -> 3 cable).
+
+Route 2: 3 -> 4 -> 2. The cables are 70 Mbps and 80 Mbps. Bottleneck is 70 Mbps.
+
+The best path is [3, 4, 2] with a throughput of 70 Mbps.
+
+Constraints
+Bandwidth capacities will always be positive integers.
+
+The graph can contain cycles.
+
+Hint: Instead of looking for the shortest cumulative sum, you are trying to find a path that keeps the bottleneck value as large as possible. Think about how you can flip the priority queue and tracker logic to prefer larger values instead of smaller ones.

@@ -1,0 +1,37 @@
+Challenge: Longest Substring Without Repeating Characters
+Problem Description
+You are given a string s. Your task is to find the length of the longest substring within s that contains no duplicate characters.
+
+A substring is a contiguous, unbroken sequence of characters within a string. For example, "abc" is a substring of "abced", but "acd" is not (because it skips 'b').
+
+Function Signature
+Implement the function length_of_longest_substring.
+
+Input: s: A string containing alphanumeric characters, symbols, or spaces.
+
+Output: An integer representing the length of the longest substring without repeating characters.
+Examples
+Example 1
+Input: s = "abcabcbb"
+
+Output: 3
+
+Explanation: The longest substring without repeating letters is "abc", which has a length of 3. (Other valid options of the same length include "bca" and "cab").
+
+Example 2
+Input: s = "bbbbb"
+
+Output: 1
+
+Explanation: The longest substring here is just "b", with a length of 1.
+
+Example 3
+Input: s = "pwwkew"
+
+Output: 3
+
+Explanation: The longest substring is "wke", which has a length of 3. Note that the answer must be a substring; "pwke" is a subsequence but not a substring because the characters aren't contiguous.
+
+Constraints
+The string length can range from 0 to 10^5.
+Interview Goal: Try to solve this in O(n) time complexity (scanning the string effectively in a single pass). A brute-force solution that checks every possible combination will be too slow (O(n^2)) and will time out on large inputs.
